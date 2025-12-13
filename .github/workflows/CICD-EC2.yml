@@ -4,8 +4,10 @@ on:
   push:
     branches: [ "main" ]
 
-jobs:
+permissions:
+  packages: write
 
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -22,17 +24,18 @@ jobs:
       run: npm run test
     - name: Building Static Files
       run: npm run build
-    - run : ls -lh
-    - uses: docker/login-action@v3.6.0
+ 
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v2
       with:
-      # Username used to log against the Docker registry
-        username: mosama25
-      # Password or personal access token used to log against the Docker registry
-        password: Hamada2510
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
     - uses: docker/build-push-action@v6.18.0
       with:
         push: true
-        tags: mosama25/react-app-cicd:${{ github.sha }},mosama25/react-app-cicd:latest
+        tags: ghcr.io/${{ github.actor }}/react-app-cicd:${{ github.sha }},ghcr.io/${{ github.actor }}/react-app-cicd:latest
         context: .
 
   deploy:
@@ -48,6 +51,6 @@ jobs:
          script: |
              docker stop react-app || true
              docker rm react-app || true
-             docker run -d -p 8080:80 --name "react-app" mosama25/react-app-cicd:${{ github.sha }}
+             docker run -d -p 8080:80 --name "react-app" ghcr.io/${{ github.actor }}/react-app-cicd:${{ github.sha }}
 
   
