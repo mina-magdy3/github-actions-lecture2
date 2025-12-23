@@ -1,6 +1,6 @@
-name: legacy ci
+name: legacy cd
 on:
-    # push:
+    push:
     pull_request:
 jobs: 
     job1:
@@ -21,3 +21,11 @@ jobs:
               with:
                      name: react-app-build
                      path: dist/
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: download artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: react-app-build
+            - run: echo "deploying to server" 
