@@ -16,7 +16,7 @@ jobs:
             - name: branch check
               if: startswith(github.ref,'main')
               run: echo "Main branch"
-            - name: if fail
+            - name: if not main
               if: success()
               run: echo "other branch"
     job2:
@@ -38,8 +38,8 @@ jobs:
             - name: success
               if: success()
               run: echo "this step will run if previous step successed "   
-            # - name: failure
-            #   run: hhhhhhhhh
+            - name: failure
+              run: exit1
             - name: failure
               if: failure()
               run: "this step will run if previous step fails "  
