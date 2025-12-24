@@ -13,4 +13,5 @@ jobs:
         environment:
             name: deploy on ${{github.event.inputs.environment}} server
         steps:
-            - run: echo "deploying on {{vars.${{github.event.inputs.environmentt}} server"
+            - name: deploy
+              run: echo "${{vars.environment_txt}}"
