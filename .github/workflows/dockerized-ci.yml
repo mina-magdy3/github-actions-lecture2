@@ -26,4 +26,5 @@ jobs:
               uses: docker/build-push-action@v6.18.0
               with: 
                 push: true
+                context: .
                 tags: ghcr.io/${{ github.actor }}/react-app-cicd:latest , ghcr.io/${{ github.actor }}/react-app-cicd:${{github.sha}}
