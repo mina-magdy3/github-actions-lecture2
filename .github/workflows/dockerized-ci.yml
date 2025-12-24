@@ -1,0 +1,29 @@
+name: dockerized ci
+on:
+    push:
+    pull_request:
+jobs:
+    job_1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v4
+            - name: install node version 20
+              uses: actions/setup-node@v6.1.0
+              with:
+                node-version: 20
+            - run: npm install
+            - run: npm run lint
+            - run: npm run test
+            - run: npm run build
+            - name: docker login
+              uses: docker/login-actions@v2
+              with:
+                registery: ghcr.io
+                username:  ${{ github.actor }}
+                password: ${{ secrets.GITHUB_TOKEN }}
+            - name: build 
+              uses: docker/build-push-actions@v6.18.0
+              with: 
+                push: true
+                tags: ghcr.io/${{ github.actor }}/react-app-cicd:latest , ghcr.io/${{ github.actor }}/react-app-cicd:${{github.sha}}
