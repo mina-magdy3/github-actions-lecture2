@@ -42,7 +42,7 @@ jobs:
               run: exit 1
             - name: failure
               if: failure()
-              run: "this step will run if previous step fails "  
+              run: echo "this step will run if previous step fails "  
             - name: cancelled
               if: cancelled()
               run: "this step will run if job is cancaelled "  
