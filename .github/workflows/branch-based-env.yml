@@ -9,8 +9,6 @@ jobs:
         steps:
             - name: deploy
               run: echo "${{vars.environment_txt}}"
-            - run: echo "${{github.ref_name}}"
-            - run: echo "${{github.ref}}"
     job2:
         if: contains(github.ref,'dev' ) 
         runs-on: ubuntu-latest
