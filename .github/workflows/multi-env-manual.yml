@@ -1,0 +1,20 @@
+name: deploy on two servers
+on: 
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: choose deploying environment
+                type: choice
+                required: true
+                options: ['staging' , 'production']
+jobs:
+    job_1:
+        runs-on: ubuntu-latest
+        if: github.event.inputs.environment == 'production'
+        steps:
+            - run: echo "deploying on production server"
+    job2:
+        runs-on: ubuntu-latest
+        if: github.event.inputs.environment == 'staging'
+        steps:
+            - run: echo "deploying on staging server"

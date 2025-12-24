@@ -1,6 +1,6 @@
 name: dockerized ci
 on:
-    push:
+    # push:
     pull_request:
 permissions:
   packages: write
