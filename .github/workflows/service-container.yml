@@ -8,10 +8,12 @@ jobs:
     services: 
         nginx:
             image: nginx:alpine
-            ports: 80:80
+            ports:
+                - 80:80
         apache:
             image: httpd:2.4
-            ports: 80:80
+            ports: 
+                - 80:80
     steps:
         - name: check nginx servce
           run: |
