@@ -40,4 +40,4 @@ jobs:
                 SERVICE_NAME : react-app
         steps:
             - name: deploy on railway
-              run: railway redeploy --service=$SERVICE_NAME -y 
+              run: railway redeploy --service=$SERVICE_NAME -y          
