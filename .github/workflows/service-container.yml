@@ -1,6 +1,6 @@
 name: service container
 on:
-    push:
+    # push:
     workflow_dispatch:
 jobs:
   job1:

@@ -1,0 +1,25 @@
+name: cache ci 
+on:
+    push:
+    workflow_dispatch:
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps: 
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v6
+              with:
+                node-version: 20
+            - uses: actions/cache@v3
+              id: npm-check
+              with:
+                path: |
+                   node_modules
+                   ~/.npm
+                key: ${{runner.os}}-node-${{hashFiles('**/package-lock.json')}}
+                restore-keys: ${{runner.os}}-node-
+            - run: npm install
+              if: steps.npm-check.outputs.cache-hit != 'true'
+            - run: npm run lint
+            - run: nom run test
+            - run: npm run build
