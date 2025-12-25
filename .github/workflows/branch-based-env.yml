@@ -1,6 +1,7 @@
-name: env feature
+name: branch based
 on: 
-    push:
+    # push:
+    workflow_dispatch:
 jobs:
     job_1:
         if: contains(github.ref,'main' )
