@@ -17,3 +17,10 @@ jobs:
                       ver: 21
             fail-fast: true
             max-parallel: 2
+        steps:
+            - name: check version
+              uses: actions/setup-node@v6
+              with:
+                node-version: ${{matrix.ver}}
+            - name: echo
+              run: "echo runuing on ${{matrix.os}} and node version ${{matrix.ver}}"
