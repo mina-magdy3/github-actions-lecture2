@@ -1,10 +1,11 @@
 name: railway deploy
 on:
-    push:
+    # push:
+    workflow_dispatch:
 permissions:
     packages: write
 jobs:
-    job1:
+    job1: 
         runs-on: ubuntu-latest
         steps:
             - name: code checkout
