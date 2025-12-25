@@ -21,5 +21,5 @@ jobs:
             - run: npm install
               if: steps.npm-check.outputs.cache-hit != 'true'
             - run: npm run lint
-            - run: nom run test
+            - run: npm run test
             - run: npm run build
