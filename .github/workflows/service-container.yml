@@ -1,0 +1,20 @@
+name: service container
+on:
+    push:
+    workflow_dispatch:
+jobs:
+    runs-on: ubuntu-latest
+    services: 
+        nginx:
+            image: nginx:alpine
+            ports: 80:80
+        apache:
+            image: httpd:2.4
+            ports: 80:80
+    steps:
+        - name: check nginx servce
+          run: |
+            curl -f http://nginx
+        - name: check apache ervice 
+          run: | 
+            curl -f http://apache
